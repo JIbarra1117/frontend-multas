@@ -124,3 +124,113 @@ export function SignIn() {
 }
 
 export default SignIn;
+
+
+/**
+ * 
+ * frontend-multas
+   ├── README.md
+   ├── eslint.config.js
+   ├── index.html
+   ├── package-lock.json
+   ├── package.json
+   ├── postcss.config.cjs
+   ├── prettier.config.cjs
+   ├── public
+   │   ├── img
+   │   │   ├── background-image.png
+   │   │   ├── bruce-mars.jpeg
+   │   │   ├── devto.svg
+   │   │   ├── favicon.png
+   │   │   ├── github.svg
+   │   │   ├── home-decor-1.jpeg
+   │   │   ├── home-decor-2.jpeg
+   │   │   ├── home-decor-3.jpeg
+   │   │   ├── home-decor-4.jpeg
+   │   │   ├── logo-asana.svg
+   │   │   ├── logo-atlassian.svg
+   │   │   ├── logo-ct-dark.png
+   │   │   ├── logo-ct.png
+   │   │   ├── logo-invision.svg
+   │   │   ├── logo-jira.svg
+   │   │   ├── logo-slack.svg
+   │   │   ├── logo-spotify.svg
+   │   │   ├── logo-xd.svg
+   │   │   ├── pattern.png
+   │   │   ├── team-1.jpeg
+   │   │   ├── team-2.jpeg
+   │   │   ├── team-3.jpeg
+   │   │   ├── team-4.jpeg
+   │   │   └── twitter-logo.svg
+   │   ├── multa.png
+   │   └── vite.svg
+   ├── src
+   │   ├── App.css
+   │   ├── App.jsx
+   │   ├── assets
+   │   │   └── react.svg
+   │   ├── configs
+   │   │   ├── charts-config.js
+   │   │   └── index.js
+   │   ├── context
+   │   │   ├── AuthContext.jsx
+   │   │   └── index.jsx
+   │   ├── data
+   │   │   ├── authors-table-data.js
+   │   │   ├── conversations-data.js
+   │   │   ├── index.js
+   │   │   ├── orders-overview-data.js
+   │   │   ├── platform-settings-data.js
+   │   │   ├── projects-data.js
+   │   │   ├── projects-table-data.js
+   │   │   ├── statistics-cards-data.js
+   │   │   └── statistics-charts-data.js
+   │   ├── index.css
+   │   ├── layouts
+   │   │   ├── auth.jsx
+   │   │   ├── configurator.jsx
+   │   │   ├── dashboard-navbar.jsx
+   │   │   ├── dashboard.jsx
+   │   │   ├── footer.jsx
+   │   │   ├── index.js
+   │   │   ├── navbar.jsx
+   │   │   └── sidenav.jsx
+   │   ├── main.jsx
+   │   ├── pages
+   │   │   ├── auth
+   │   │   │   ├── index.js
+   │   │   │   ├── sign-in.jsx
+   │   │   │   └── sign-up.jsx
+   │   │   ├── dashboard
+   │   │   │   ├── home.jsx
+   │   │   │   ├── index.js
+   │   │   │   ├── notifications.jsx
+   │   │   │   ├── profile.jsx
+   │   │   │   └── tables.jsx
+   │   │   └── multas
+   │   │       └── GestionMultas.jsx
+   │   ├── routes
+   │   ├── routes.jsx
+   │   │   └── ProtectedRoute.jsx
+   │   └── widgets
+   │       ├── buttons
+   │       │   ├── button-simply.jsx
+   │       │   └── index.js
+   │       ├── cards
+   │       │   ├── index.js
+   │       │   ├── message-card.jsx
+   │       │   ├── profile-info-card.jsx
+   │       │   └── statistics-card.jsx
+   │       ├── charts
+   │       │   ├── index.js
+   │       │   └── statistics-chart.jsx
+   │       └── layout
+   │           ├── configurator.jsx
+   │           ├── dashboard-navbar.jsx
+   │           ├── footer.jsx
+   │           ├── index.js
+   │           ├── navbar.jsx
+   │           └── sidenav.jsx
+   ├── tailwind.config.js
+   └── vite.config.js
+ */

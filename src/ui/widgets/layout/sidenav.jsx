@@ -7,7 +7,7 @@ import {
   IconButton,
   Typography,
 } from "@material-tailwind/react";
-import { useMaterialTailwindController, setOpenSidenav } from "../../context";
+import { useMaterialTailwindController, setOpenSidenav } from "../../../ui/context";
 
 export function Sidenav({
     brandImg="/img/logo-ct.png",

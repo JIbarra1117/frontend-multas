@@ -24,7 +24,7 @@ import {
   useMaterialTailwindController,
   setOpenConfigurator,
   setOpenSidenav,
-} from "../../context";
+} from "../../../ui/context";
 
 export function DashboardNavbar() {
   const [controller, dispatch] = useMaterialTailwindController();
