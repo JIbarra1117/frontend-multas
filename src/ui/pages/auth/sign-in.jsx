@@ -5,21 +5,43 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { loginUser } from "../../../application/auth/loginUser"; // alias sugerido
+import { useState } from "react";
 
 export function SignIn() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const navigate = useNavigate();
+  const { login } = useAuth();
+
   return (
     <section className="m-8 flex gap-4">
       <div className="w-full lg:w-3/5 mt-24">
         <div className="text-center">
-          <Typography variant="h2" className="font-bold mb-4">Sign In</Typography>
-          <Typography variant="paragraph" color="blue-gray" className="text-lg font-normal">Enter your email and password to Sign In.</Typography>
+          <Typography variant="h2" className="font-bold mb-4">Iniciar sesión</Typography>
+          <Typography variant="paragraph" color="blue-gray" className="text-lg font-normal">Ingresa tu correo y contraseña para Iniciar Sesión</Typography>
         </div>
-        <form className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
+        <form
+          onSubmit={async (e) => {
+            e.preventDefault();
+            setError("");
+
+            try {
+              const { token, user } = await loginUser(email, password);
+              login(token, user); // guarda en contexto
+              navigate("/dashboard/home");
+            } catch (err) {
+              setError(err.response?.data?.error || "Credenciales inválidas");
+            }
+          }}
+          className="mt-8 mb-2 mx-auto w-80 max-w-screen-lg lg:w-1/2">
           <div className="mb-1 flex flex-col gap-6">
             <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
-              Your email
+              Tu correo
             </Typography>
             <Input
               size="lg"
@@ -28,9 +50,11 @@ export function SignIn() {
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
+              onChange={(e) => setEmail(e.target.value)}
+
             />
             <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
-              Password
+              Contraseña
             </Typography>
             <Input
               type="password"
@@ -40,9 +64,10 @@ export function SignIn() {
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <Checkbox
+          {/* <Checkbox
             label={
               <Typography
                 variant="small"
@@ -59,13 +84,18 @@ export function SignIn() {
               </Typography>
             }
             containerProps={{ className: "-ml-2.5" }}
-          />
-          <Button className="mt-6" fullWidth>
-            Sign In
+          /> */}
+          <Button type="submit" className="mt-6 autoco" fullWidth>
+            Iniciar sesión
           </Button>
+          {error && (
+            <Typography color="red" className="text-center text-sm mt-2">
+              {error}
+            </Typography>
+          )}
 
           <div className="flex items-center justify-between gap-2 mt-6">
-            <Checkbox
+            {/* <Checkbox
               label={
                 <Typography
                   variant="small"
@@ -76,15 +106,15 @@ export function SignIn() {
                 </Typography>
               }
               containerProps={{ className: "-ml-2.5" }}
-            />
-            <Typography variant="small" className="font-medium text-gray-900">
+            /> */}
+            {/* <Typography variant="small" className="font-medium text-gray-900">
               <a href="#">
-                Forgot Password
+                Contraseña olvidada
               </a>
-            </Typography>
+            </Typography> */}
           </div>
           <div className="space-y-4 mt-8">
-            <Button size="lg" color="white" className="flex items-center gap-2 justify-center shadow-md" fullWidth>
+            {/* <Button size="lg" color="white" className="flex items-center gap-2 justify-center shadow-md" fullWidth>
               <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_1156_824)">
                   <path d="M16.3442 8.18429C16.3442 7.64047 16.3001 7.09371 16.206 6.55872H8.66016V9.63937H12.9813C12.802 10.6329 12.2258 11.5119 11.3822 12.0704V14.0693H13.9602C15.4741 12.6759 16.3442 10.6182 16.3442 8.18429Z" fill="#4285F4" />
@@ -103,11 +133,11 @@ export function SignIn() {
             <Button size="lg" color="white" className="flex items-center gap-2 justify-center shadow-md" fullWidth>
               <img src="/img/twitter-logo.svg" height={24} width={24} alt="" />
               <span>Sign in With Twitter</span>
-            </Button>
+            </Button> */}
           </div>
           <Typography variant="paragraph" className="text-center text-blue-gray-500 font-medium mt-4">
-            Not registered?
-            <Link to="/auth/sign-up" className="text-gray-900 ml-1">Create account</Link>
+            No te haz registrado?
+            <Link to="/auth/sign-up" className="text-gray-900 ml-1">Crear cuenta</Link>
           </Typography>
         </form>
 
@@ -124,113 +154,3 @@ export function SignIn() {
 }
 
 export default SignIn;
-
-
-/**
- * 
- * frontend-multas
-   ├── README.md
-   ├── eslint.config.js
-   ├── index.html
-   ├── package-lock.json
-   ├── package.json
-   ├── postcss.config.cjs
-   ├── prettier.config.cjs
-   ├── public
-   │   ├── img
-   │   │   ├── background-image.png
-   │   │   ├── bruce-mars.jpeg
-   │   │   ├── devto.svg
-   │   │   ├── favicon.png
-   │   │   ├── github.svg
-   │   │   ├── home-decor-1.jpeg
-   │   │   ├── home-decor-2.jpeg
-   │   │   ├── home-decor-3.jpeg
-   │   │   ├── home-decor-4.jpeg
-   │   │   ├── logo-asana.svg
-   │   │   ├── logo-atlassian.svg
-   │   │   ├── logo-ct-dark.png
-   │   │   ├── logo-ct.png
-   │   │   ├── logo-invision.svg
-   │   │   ├── logo-jira.svg
-   │   │   ├── logo-slack.svg
-   │   │   ├── logo-spotify.svg
-   │   │   ├── logo-xd.svg
-   │   │   ├── pattern.png
-   │   │   ├── team-1.jpeg
-   │   │   ├── team-2.jpeg
-   │   │   ├── team-3.jpeg
-   │   │   ├── team-4.jpeg
-   │   │   └── twitter-logo.svg
-   │   ├── multa.png
-   │   └── vite.svg
-   ├── src
-   │   ├── App.css
-   │   ├── App.jsx
-   │   ├── assets
-   │   │   └── react.svg
-   │   ├── configs
-   │   │   ├── charts-config.js
-   │   │   └── index.js
-   │   ├── context
-   │   │   ├── AuthContext.jsx
-   │   │   └── index.jsx
-   │   ├── data
-   │   │   ├── authors-table-data.js
-   │   │   ├── conversations-data.js
-   │   │   ├── index.js
-   │   │   ├── orders-overview-data.js
-   │   │   ├── platform-settings-data.js
-   │   │   ├── projects-data.js
-   │   │   ├── projects-table-data.js
-   │   │   ├── statistics-cards-data.js
-   │   │   └── statistics-charts-data.js
-   │   ├── index.css
-   │   ├── layouts
-   │   │   ├── auth.jsx
-   │   │   ├── configurator.jsx
-   │   │   ├── dashboard-navbar.jsx
-   │   │   ├── dashboard.jsx
-   │   │   ├── footer.jsx
-   │   │   ├── index.js
-   │   │   ├── navbar.jsx
-   │   │   └── sidenav.jsx
-   │   ├── main.jsx
-   │   ├── pages
-   │   │   ├── auth
-   │   │   │   ├── index.js
-   │   │   │   ├── sign-in.jsx
-   │   │   │   └── sign-up.jsx
-   │   │   ├── dashboard
-   │   │   │   ├── home.jsx
-   │   │   │   ├── index.js
-   │   │   │   ├── notifications.jsx
-   │   │   │   ├── profile.jsx
-   │   │   │   └── tables.jsx
-   │   │   └── multas
-   │   │       └── GestionMultas.jsx
-   │   ├── routes
-   │   ├── routes.jsx
-   │   │   └── ProtectedRoute.jsx
-   │   └── widgets
-   │       ├── buttons
-   │       │   ├── button-simply.jsx
-   │       │   └── index.js
-   │       ├── cards
-   │       │   ├── index.js
-   │       │   ├── message-card.jsx
-   │       │   ├── profile-info-card.jsx
-   │       │   └── statistics-card.jsx
-   │       ├── charts
-   │       │   ├── index.js
-   │       │   └── statistics-chart.jsx
-   │       └── layout
-   │           ├── configurator.jsx
-   │           ├── dashboard-navbar.jsx
-   │           ├── footer.jsx
-   │           ├── index.js
-   │           ├── navbar.jsx
-   │           └── sidenav.jsx
-   ├── tailwind.config.js
-   └── vite.config.js
- */

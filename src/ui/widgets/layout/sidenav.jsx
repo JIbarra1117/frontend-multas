@@ -11,7 +11,7 @@ import { useMaterialTailwindController, setOpenSidenav } from "../../../ui/conte
 
 export function Sidenav({
     brandImg="/img/logo-ct.png",
-    brandName= "Material Tailwind React",
+    brandName= "Multas",
     routes }) 
 {
   const [controller, dispatch] = useMaterialTailwindController();
@@ -98,17 +98,6 @@ export function Sidenav({
     </aside>
   );
 }
-
-// Sidenav.defaultProps = {
-//   brandImg="/img/logo-ct.png",
-//   brandName= "Material Tailwind React",
-// };
-
-// Sidenav.propTypes = {
-//   brandImg: PropTypes.string,
-//   brandName: PropTypes.string,
-//   routes: PropTypes.arrayOf(PropTypes.object).isRequired,
-// };
 
 Sidenav.displayName = "/src/widgets/layout/sidnave.jsx";
 
