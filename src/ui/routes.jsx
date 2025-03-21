@@ -8,7 +8,7 @@ import {
   RectangleStackIcon,
 } from "@heroicons/react/24/solid";
 import { Home, Profile, Tables, Notifications } from "./pages/dashboard";
-import GestionMultas from "./pages/multas/GestionMultas";
+import RegistrarMultas from "./pages/multas/RegistrarMultas";
 import { SignIn, SignUp } from "./pages/auth";
 
 const icon = {
@@ -21,31 +21,31 @@ export const routes = [
     pages: [
       {
         icon: <HomeIcon {...icon} />,
-        name: "dashboard",
+        name: "Inicio",
         path: "/home",
         element: <Home />,
       },
       {
         icon: <ArchiveBoxXMarkIcon {...icon} />,
-        name: "Gestión multas",
+        name: "Registrar multas",
         path: "/gestion-multas",
-        element: <GestionMultas />,
+        element: <RegistrarMultas />,
       },
       {
         icon: <UserCircleIcon {...icon} />,
-        name: "profile",
+        name: "Perfil",
         path: "/profile",
         element: <Profile />,
       },
       {
         icon: <TableCellsIcon {...icon} />,
-        name: "tables",
+        name: "Tablas",
         path: "/tables",
         element: <Tables />,
       },
       {
         icon: <InformationCircleIcon {...icon} />,
-        name: "notifications",
+        name: "Notificaciones",
         path: "/notifications",
         element: <Notifications />,
       },
