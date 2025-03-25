@@ -19,6 +19,12 @@ export function Tables() {
   const { token } = useAuth();
   const [historial, setHistorial] = useState([]);
   const [resumenByUser, setResumenByUser] = useState([]);
+  const [fechaSeleccionada, setFechaSeleccionada] = useState(() => {
+    const hoy = new Date(); return hoy.toISOString().split("T")[0]; // yyyy-mm-dd 
+  });
+  const historialFiltrado = historial.filter((multa) => {
+    const fechaMulta = new Date(multa.fecha_aplicacion).toISOString().split("T")[0]; return fechaMulta === fechaSeleccionada;
+  });
 
   useEffect(() => {
     const cargar = async () => {
@@ -32,6 +38,119 @@ export function Tables() {
 
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12">
+      <Card>
+        {" "}
+        <CardHeader
+          variant="gradient"
+          color="gray"
+          className="mb-8 p-6 flex justify-between items-center"
+        >
+          {" "}
+          <Typography variant="h6" color="white">
+            {" "}
+            Historial de Multas por Registro{" "}
+          </Typography>{" "}
+          <div className="flex items-center gap-2">
+            {" "}
+            <label className="text-white text-sm">Filtrar por fecha:</label>{" "}
+            <input
+              type="date"
+              className="rounded px-2 py-1 text-sm text-gray-700"
+              value={fechaSeleccionada}
+              onChange={(e) => setFechaSeleccionada(e.target.value)}
+            />{" "}
+          </div>{" "}
+        </CardHeader>{" "}
+        <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
+          {" "}
+          <table className="w-full min-w-[640px] table-auto">
+            {" "}
+            <thead>
+              {" "}
+              <tr>
+                {" "}
+                {[
+                  "Multado",
+                  "Autor",
+                  "Multa",
+                  "Descripción",
+                  "Fecha",
+                  "Aprobado",
+                ].map((el) => (
+                  <th
+                    key={el}
+                    className="border-b border-blue-gray-50 py-3 px-8 text-left"
+                  >
+                    {" "}
+                    <Typography
+                      variant="small"
+                      className="text-[11px] font-bold uppercase text-blue-gray-400"
+                    >
+                      {" "}
+                      {el}{" "}
+                    </Typography>{" "}
+                  </th>
+                ))}{" "}
+              </tr>{" "}
+            </thead>{" "}
+            <tbody>
+              {" "}
+              {historialFiltrado.map((r, index) => {
+                const baseStyle = "py-3 px-8 border-b border-blue-gray-50";
+                return (
+                  <tr key={r.id}>
+                    {" "}
+                    <td className={baseStyle}>
+                      {" "}
+                      <Typography className="text-sm font-medium text-blue-gray-700">
+                        {" "}
+                        {r.usuarioMultado?.nombre}{" "}
+                      </Typography>{" "}
+                    </td>{" "}
+                    <td className={baseStyle}>
+                      {" "}
+                      <Typography className="text-sm text-blue-gray-700">
+                        {" "}
+                        {r.usuarioAutor?.nombre}{" "}
+                      </Typography>{" "}
+                    </td>{" "}
+                    <td className={baseStyle}>
+                      {" "}
+                      <Typography className="text-sm text-blue-gray-700">
+                        {" "}
+                        {r.tipoMulta?.descripcion}{" "}
+                      </Typography>{" "}
+                    </td>{" "}
+                    <td className={baseStyle}>
+                      {" "}
+                      <Typography className="text-sm text-blue-gray-600">
+                        {" "}
+                        {r.descripcion}{" "}
+                      </Typography>{" "}
+                    </td>{" "}
+                    <td className={baseStyle}>
+                      {" "}
+                      <Typography className="text-xs text-blue-gray-500">
+                        {" "}
+                        {new Date(r.fecha_aplicacion).toLocaleString()}{" "}
+                      </Typography>{" "}
+                    </td>{" "}
+                    <td className={baseStyle}>
+                      {" "}
+                      <Chip
+                        value={r.aprobado ? "Aprobado" : "Pendiente"}
+                        color={r.aprobado ? "green" : "amber"}
+                        size="sm"
+                      />{" "}
+                    </td>{" "}
+                  </tr>
+                );
+              })}{" "}
+            </tbody>{" "}
+          </table>{" "}
+        </CardBody>{" "}
+      </Card>;
+
       <Card>
         <CardHeader
           variant="gradient"
@@ -49,7 +168,7 @@ export function Tables() {
               <tr>
                 {["Usuario", "Total", "Aprobadas", "Pendientes", "Total a Pagar"].map((header) => (
                   <th key={header}
-                    className="border-b border-blue-gray-50 py-3 px-5 text-left" >
+                    className="border-b border-blue-gray-50 py-3 px-8 text-left" >
                     <Typography
                       variant="small"
                       className="text-[11px] font-bold uppercase text-blue-gray-400" >
@@ -61,7 +180,7 @@ export function Tables() {
               {
                 resumenByUser.map(({ usuario_id, nombre, total_multas, aprobadas, pendientes }, index) => {
                   const totalPagar = (aprobadas * 0.25).toFixed(2);
-                  const cellStyle = `py-3 px-5 ${index < resumenByUser.length - 1 ? "border-b border-blue-gray-50" : "border-b border-blue-gray-50"}`;
+                  const cellStyle = `py-3 px-8 ${index < resumenByUser.length - 1 ? "border-b border-blue-gray-50" : "border-b border-blue-gray-50"}`;
                   return (
                     <tr key={usuario_id}>
                       <td className={cellStyle}>
@@ -92,7 +211,7 @@ export function Tables() {
                 {["Multado", "Autor", "Multa", "Descripción", "Fecha", "Aprobado"].map((el) => (
                   <th
                     key={el}
-                    className="border-b border-blue-gray-50 py-3 px-5 text-left"
+                    className="border-b border-blue-gray-50 py-3 px-8 text-left"
                   >
                     <Typography
                       variant="small"
@@ -106,7 +225,7 @@ export function Tables() {
             </thead>
             <tbody>
               {historial.map((r, key) => {
-                const className = "py-3 px-5 " + (key < historial.length - 1 ? "border-b border-blue-gray-50" : "");
+                const className = "py-3 px-8 " + (key < historial.length - 1 ? "border-b border-blue-gray-50" : "");
                 return (
                   <tr key={r.id}>
                     <td className={className}>

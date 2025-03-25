@@ -1,3 +1,5 @@
-import { fetchAproveMulta } from "../../infrastructure/registroMultaApi";
+import { fetchAproveMulta } from "../../infrastructure/api/registroMultaAPI";
 
-export const approveMulta = async (registroMultaId, token) => { return await fetchAproveMulta(registroMultaId, token); };
+export const approveMulta = async (registroMultaId, token) => { 
+    return await fetchAproveMulta(registroMultaId, token); 
+};

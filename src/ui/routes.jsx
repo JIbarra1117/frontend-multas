@@ -9,6 +9,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { Home, Profile, Tables, Notifications } from "./pages/dashboard";
 import RegistrarMultas from "./pages/multas/RegistrarMultas";
+import ApproveMultas from "./pages/multas/ApproveMultas";
 import { SignIn, SignUp } from "./pages/auth";
 
 const icon = {
@@ -22,8 +23,14 @@ export const routes = [
       {
         icon: <HomeIcon {...icon} />,
         name: "Inicio",
-        path: "/home",
+        path: "/inicio",
         element: <Home />,
+      },
+      {
+        icon: <TableCellsIcon {...icon} />,
+        name: "Resumen",
+        path: "/resumen",
+        element: <Tables />,
       },
       {
         icon: <ArchiveBoxXMarkIcon {...icon} />,
@@ -33,20 +40,14 @@ export const routes = [
       },
       {
         icon: <UserCircleIcon {...icon} />,
-        name: "Perfil",
-        path: "/profile",
-        element: <Profile />,
-      },
-      {
-        icon: <TableCellsIcon {...icon} />,
-        name: "Tablas",
-        path: "/tables",
-        element: <Tables />,
+        name: "Aprobar multas",
+        path: "/aprobar-multas",
+        element: <ApproveMultas />,
       },
       {
         icon: <InformationCircleIcon {...icon} />,
         name: "Notificaciones",
-        path: "/notifications",
+        path: "/notificaciones",
         element: <Notifications />,
       },
     ],

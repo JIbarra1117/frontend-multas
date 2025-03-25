@@ -42,7 +42,7 @@ export function SignUp() {
             try {
               const { token, user } = await registerUser({ nombre, email, password, rol });
               login(token, user); // guarda en contexto
-              navigate("/dashboard/home");
+              navigate("/dashboard/inicio");
             } catch (err) {
               setError(err?.response?.data?.error || "Error al registrar");
             }

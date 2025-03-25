@@ -33,7 +33,7 @@ export function SignIn() {
             try {
               const { token, user } = await loginUser(email, password);
               login(token, user); // guarda en contexto
-              navigate("/dashboard/home");
+              navigate("/dashboard/inicio");
             } catch (err) {
               setError(err.response?.data?.error || "Credenciales inválidas");
             }
