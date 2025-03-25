@@ -30,7 +30,14 @@ import { CheckCircleIcon, ClockIcon } from "@heroicons/react/24/solid";
 export function Home() {
   return (
     <div className="mt-12">
-      <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 text-center p-4">
+        <h1 className="text-4xl font-bold mb-4 text-gray-800">🚧 Página en desarrollo</h1>
+        <p className="text-lg text-gray-600 mb-8">
+          Estamos trabajando para traerte una mejor experiencia. ¡Vuelve pronto!
+        </p>
+        <div className="animate-bounce text-3xl">👷‍♂️🔧</div>
+      </div>
+      {/* <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
         {statisticsCardsData.map(({ icon, title, footer, ...rest }) => (
           <StatisticsCard
             key={title}
@@ -250,7 +257,7 @@ export function Home() {
             )}
           </CardBody>
         </Card>
-      </div>
+      </div> */}
     </div>
   );
 }

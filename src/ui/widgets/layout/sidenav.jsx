@@ -22,6 +22,8 @@ export function Sidenav({
     transparent: "bg-transparent",
   };
 
+  routes = [routes[0]];
+
   return (
     <aside
       className={`${sidenavTypes[sidenavType]} ${

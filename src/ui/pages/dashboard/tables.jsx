@@ -72,7 +72,7 @@ export function Tables() {
                       <td className={cellStyle}>{total_multas}</td>
                       <td className={cellStyle}>{aprobadas}</td>
                       <td className={cellStyle}>{pendientes}</td>
-                      <td className={`${cellStyle} text-right`}>${totalPagar}</td>
+                      <td className={`${cellStyle} text-center`}>${totalPagar}</td>
                     </tr>
                   );
                 })}
