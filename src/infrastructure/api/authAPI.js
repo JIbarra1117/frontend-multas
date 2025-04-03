@@ -1,7 +1,7 @@
-import axios from "axios";
+import { api } from "../../config/api"; // ajusta la ruta según tu estructura
 
 export const loginAPI = async (email, password) => {
-  const response = await axios.post("http://localhost:5000/api/auth/login", {
+  const response = await api.post("/auth/login", {
     email,
     password,
   });
@@ -12,7 +12,7 @@ export const loginAPI = async (email, password) => {
 };
 
 export const registerAPI = async ({ nombre, email, password, rol }) => {
-    const res = await axios.post("http://localhost:5000/api/auth/register", {
+    const res = await api.post("/auth/register", {
       nombre,
       email,
       password,

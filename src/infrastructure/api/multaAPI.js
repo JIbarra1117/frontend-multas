@@ -1,7 +1,7 @@
-import axios from "axios";
+import { api } from "../../config/api"; // ajusta la ruta según tu estructura
 
 export const createMultaAPI = async (data, token) => {
-  const response = await axios.post("http://localhost:5000/api/multas/create", data, {
+  const response = await api.post("/multas/create", data, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -11,7 +11,7 @@ export const createMultaAPI = async (data, token) => {
 };
 
 export const getMulta = async (token) => {
-    const res = await axios.get("http://localhost:5000/api/multas", {
+    const res = await api.get("/multas", {
       headers: { Authorization: `Bearer ${token}` },
     });
     return res.data; // [{ id, nombre }]

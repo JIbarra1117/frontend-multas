@@ -1,7 +1,7 @@
-import axios from "axios";
+import { api } from "../../config/api"; // ajusta la ruta según tu estructura
 
 export const createRegistroMulta = async (data, token) => {
-  const res = await axios.post("http://localhost:5000/api/registro-multas/create", data, {
+  const res = await api.post("http://localhost:5000/api/registro-multas/create", data, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -10,7 +10,7 @@ export const createRegistroMulta = async (data, token) => {
 };
 
 export const fetchHistorialMultas = async (token) => {
-  const res = await axios.get("http://localhost:5000/api/registro-multas", {
+  const res = await api.get("http://localhost:5000/api/registro-multas", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -19,7 +19,7 @@ export const fetchHistorialMultas = async (token) => {
 };
 
 export const fetchHistorialMultasPendientes = async (token, userId) => {
-  const res = await axios.get(`http://localhost:5000/api/registro-multas/pendientes/${userId}`, {
+  const res = await api.get(`http://localhost:5000/api/registro-multas/pendientes/${userId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -28,7 +28,7 @@ export const fetchHistorialMultasPendientes = async (token, userId) => {
 };
 
 export const fetchHistorialMultasAprobadas = async (token, userId) => {
-  const res = await axios.get(`http://localhost:5000/api/registro-multas/aprobadas/${userId}`, {
+  const res = await api.get(`http://localhost:5000/api/registro-multas/aprobadas/${userId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -38,7 +38,7 @@ export const fetchHistorialMultasAprobadas = async (token, userId) => {
 
 
 export const fetchHistorialMultasPorUsuario = async (token) => {
-  const res = await axios.get("http://localhost:5000/api/registro-multas/resumen-por-usuario", {
+  const res = await api.get("http://localhost:5000/api/registro-multas/resumen-por-usuario", {
     headers: {
       Authorization: `Bearer ${token}`,
     },

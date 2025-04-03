@@ -75,7 +75,19 @@ function RegistrarMultas() {
         <motion.div key="form" className="col-span-full" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 30 }} transition={{ duration: 0.4 }}>
           <Card className="col-span-full mt-6 p-6 border bg-blue-gray-50">
             <Typography variant="h6" className="mb-2">
-              Registrar multa para {usuarioSeleccionado.nombre}
+              Registrar multa para{" "}
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={usuarioSeleccionado.nombre}
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 5 }}
+                  transition={{ duration: 0.3 }}
+                  className="inline-block"
+                >
+                  {usuarioSeleccionado.nombre}
+                </motion.span>
+              </AnimatePresence>
             </Typography>
 
             <div className="mb-4">
