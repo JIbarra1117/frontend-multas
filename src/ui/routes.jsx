@@ -6,6 +6,7 @@ import {
   InformationCircleIcon,
   ServerStackIcon,
   RectangleStackIcon,
+  CheckCircleIcon,
 } from "@heroicons/react/24/solid";
 import { Home, Profile, Tables, Notifications } from "./pages/dashboard";
 import RegistrarMultas from "./pages/multas/RegistrarMultas";
@@ -39,7 +40,7 @@ export const routes = [
         element: <RegistrarMultas />,
       },
       {
-        icon: <UserCircleIcon {...icon} />,
+        icon: <CheckCircleIcon {...icon} />,
         name: "Aprobar multas",
         path: "/aprobar-multas",
         element: <ApproveMultas />,

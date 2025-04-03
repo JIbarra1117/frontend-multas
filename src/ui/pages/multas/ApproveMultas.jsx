@@ -10,8 +10,9 @@ import {
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../ui/context/AuthContext";
-import { getHistorialMultas } from "../../../application/multas/getHistorialMultas";
+// import { getHistorialMultas } from "../../../application/multas/getHistorialMultas";
 import { approveMulta } from "../../../application/multas/approveMulta";
+import { getHistorialMultasPendientes } from "../../../application/multas/getHistorialMultasPendientes";
 
 function AprobarMultas() {
     const { token, user } = useAuth();
@@ -19,7 +20,8 @@ function AprobarMultas() {
     const [loading, setLoading] = useState(false);
 
     const cargarHistorial = async () => {
-        const data = await getHistorialMultas(token);
+        console.log(user)
+        const data = await getHistorialMultasPendientes(token, user.id);
         setHistorial(data);
     };
 
@@ -35,6 +37,7 @@ function AprobarMultas() {
         }
     };
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     useEffect(() => {
         cargarHistorial();
     }, [token]);

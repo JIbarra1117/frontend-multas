@@ -18,6 +18,24 @@ export const fetchHistorialMultas = async (token) => {
   return res.data;
 };
 
+export const fetchHistorialMultasPendientes = async (token, userId) => {
+  const res = await axios.get(`http://localhost:5000/api/registro-multas/pendientes/${userId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res.data;
+};
+
+export const fetchHistorialMultasAprobadas = async (token, userId) => {
+  const res = await axios.get(`http://localhost:5000/api/registro-multas/aprobadas/${userId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res.data;
+};
+
 
 export const fetchHistorialMultasPorUsuario = async (token) => {
   const res = await axios.get("http://localhost:5000/api/registro-multas/resumen-por-usuario", {
@@ -27,8 +45,6 @@ export const fetchHistorialMultasPorUsuario = async (token) => {
   });
   return res.data;
 };
-
-
 
 export async function fetchAproveMulta(registroMultaId, token) {
   try {
