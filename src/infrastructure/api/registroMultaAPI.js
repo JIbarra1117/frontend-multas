@@ -1,7 +1,7 @@
 import { api } from "../../config/api"; // ajusta la ruta según tu estructura
 
 export const createRegistroMulta = async (data, token) => {
-  const res = await api.post("http://localhost:5000/api/registro-multas/create", data, {
+  const res = await api.post("/registro-multas/create", data, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -10,7 +10,7 @@ export const createRegistroMulta = async (data, token) => {
 };
 
 export const fetchHistorialMultas = async (token) => {
-  const res = await api.get("http://localhost:5000/api/registro-multas", {
+  const res = await api.get("/registro-multas", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -19,7 +19,7 @@ export const fetchHistorialMultas = async (token) => {
 };
 
 export const fetchHistorialMultasPendientes = async (token, userId) => {
-  const res = await api.get(`http://localhost:5000/api/registro-multas/pendientes/${userId}`, {
+  const res = await api.get(`/registro-multas/pendientes/${userId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -28,7 +28,7 @@ export const fetchHistorialMultasPendientes = async (token, userId) => {
 };
 
 export const fetchHistorialMultasAprobadas = async (token, userId) => {
-  const res = await api.get(`http://localhost:5000/api/registro-multas/aprobadas/${userId}`, {
+  const res = await api.get(`/registro-multas/aprobadas/${userId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -38,7 +38,7 @@ export const fetchHistorialMultasAprobadas = async (token, userId) => {
 
 
 export const fetchHistorialMultasPorUsuario = async (token) => {
-  const res = await api.get("http://localhost:5000/api/registro-multas/resumen-por-usuario", {
+  const res = await api.get("/registro-multas/resumen-por-usuario", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -46,26 +46,30 @@ export const fetchHistorialMultasPorUsuario = async (token) => {
   return res.data;
 };
 
-export async function fetchAproveMulta(registroMultaId, token) {
+
+export async function fetchAproveMulta(registroMultaId, token, userId) {
   try {
-    const response = await fetch(
-      `http://localhost:5000/api/registro-multas/approve/${registroMultaId}`,
+    console.log(registroMultaId, userId)
+    const res = await api.post(
+      `/registro-multas/approve/${registroMultaId}`,
       {
-        method: "POST",
+        userId: userId,
+      },
+      {
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
     );
 
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.error || "Error al aprobar la multa");
+    // Axios lanza error automáticamente si status >= 400, pero si necesitas:
+    if (res.status !== 200) {
+      throw new Error(res.data?.error || "Error al aprobar la multa");
     }
 
-    return await response.json();
+    return res.data;
   } catch (error) {
-    throw new Error(error.message);
+    throw new Error(error.message || "Error en la solicitud");
   }
 }
+

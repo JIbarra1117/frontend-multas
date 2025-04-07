@@ -30,7 +30,7 @@ function AprobarMultas() {
     const handleAprobar = async (registroMultaId) => {
         try {
             setLoading(true);
-            await approveMulta(registroMultaId, token);
+            await approveMulta(registroMultaId, token, user.id);
             await cargarHistorial();
         } catch (error) {
             console.error("❌ Error al aprobar multa:", error.message);

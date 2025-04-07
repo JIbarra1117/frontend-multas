@@ -52,7 +52,7 @@ function RegistrarMultas() {
       setMultaId("");
     } catch (error) {
       console.error(error);
-      alert("❌ Error al registrar multa");
+      alert("❌ Error al registrar multa", error);
     }
   };
 
