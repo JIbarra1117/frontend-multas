@@ -46,6 +46,7 @@ export function DashboardNavbar() {
   // }
   const handleLogout = () => {
     logout();
+    // eslint-disable-next-line no-undef
     navigate("/auth/sign-in");
   }
 

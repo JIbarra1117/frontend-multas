@@ -38,7 +38,7 @@ function App() {
         />
 
         {/* Redirección general */}
-        <Route path="*" element={<Navigate to="/dashboard/home" replace />} />
+        <Route path="*" element={<Navigate to="/dashboard/inicio" replace />} />
       </Routes>
     </>
   );
