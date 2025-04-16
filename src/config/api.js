@@ -11,66 +11,36 @@ export const api = axios.create({
   },
 });
 
-// Función para configurar el interceptor
-// export const setAuthInterceptor = (token, logout, navigate) => {
-//   api.interceptors.request.use(
-//     (config) => {
-//       if (!token) {
-//         logout?.();
-//         navigate?.("/auth/sign-in");
-//         throw new axios.Cancel("Token no presente");
-//       }
-
-//       try {
-//         const decoded = jwtDecode(token);
-//         const currentTime = Date.now() / 1000;
-//         if (decoded.exp < currentTime) {
-//           logout?.();
-//           navigate?.("/auth/sign-in");
-//           throw new axios.Cancel("Token expirado");
-//         }
-//       } catch {
-//         logout?.();
-//         navigate?.("/auth/sign-in");
-//         throw new axios.Cancel("Token inválido");
-//       }
-
-//       config.headers.Authorization = `Bearer ${token}`;
-//       return config;
-//     },
-//     (error) => Promise.reject(error)
-//   );
-// };
-
 // 🔁 Bandera global para evitar múltiples interceptores
 let isInterceptorSet = false;
-export const setAuthInterceptor = (token, logout, navigate) => {
+export const setAuthInterceptor = (token, logout) => {
   if (isInterceptorSet) return;
 
-  api.interceptors.request.use(
+  requestInterceptorId = api.interceptors.request.use(
     (config) => {
-      // ⛔ No interceptar rutas públicas
       if (config.url.includes("/auth/login") || config.url.includes("/auth/register")) {
         return config;
       }
 
       if (!token) {
         logout?.();
-        navigate?.("/auth/sign-in");
+        window.location.href = "/auth/sign-in";
         throw new axios.Cancel("Token no presente");
       }
 
       try {
         const decoded = jwtDecode(token);
-        const currentTime = Date.now() / 1000;
+        const currentTime = Math.floor(Date.now() / 1000);
         if (decoded.exp < currentTime) {
+          console.log();
           logout?.();
-          navigate?.("/auth/sign-in");
-          throw new axios.Cancel("Token expirado");
+          window.location.href = "/auth/session-expired";
+          return config;
+          // throw new axios.Cancel("Token expirado");
         }
       } catch {
         logout?.();
-        navigate?.("/auth/sign-in");
+        window.location.href = "/auth/session-expired";
         throw new axios.Cancel("Token inválido");
       }
 
@@ -83,3 +53,12 @@ export const setAuthInterceptor = (token, logout, navigate) => {
   isInterceptorSet = true;
 };
 
+let requestInterceptorId = null;
+
+export const clearAuthInterceptor = () => {
+  if (requestInterceptorId !== null) {
+    api.interceptors.request.eject(requestInterceptorId);
+    requestInterceptorId = null;
+    isInterceptorSet = false;
+  }
+};

@@ -3,6 +3,7 @@ import { Dashboard, Auth } from "./layouts";
 import RegistrarMultas from "./pages/multas/RegistrarMultas";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import PublicRoute from "./routes/PublicRoute";
+import SessionExpired from "./pages/auth/SessionExpired";
 
 function App() {
   // console.log("🟢 App cargado");
@@ -33,6 +34,14 @@ function App() {
           element={
             <PublicRoute>
               <Auth />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/auth/session-expired"
+          element={
+            <PublicRoute>
+              <SessionExpired />
             </PublicRoute>
           }
         />
