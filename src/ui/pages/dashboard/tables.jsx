@@ -38,7 +38,6 @@ export function Tables() {
   return (
     <motion.div key="form" className="col-span-full" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 30 }} transition={{ duration: 0.4 }}>
       <div className="mt-12 mb-8 flex flex-col gap-12">
-        
       <Card>
         <CardHeader
           variant="gradient"

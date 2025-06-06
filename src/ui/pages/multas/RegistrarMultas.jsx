@@ -12,6 +12,7 @@ import { getMultasCatalogo } from "../../../application/multas/getMultasCatalogo
 import { fetchUsuarios } from "../../../application/users/getUsuarios";
 import { registrarMulta } from "../../../application/multas/createRegistroMulta";
 import { motion, AnimatePresence } from "framer-motion";
+import Swal from "sweetalert2";
 
 function RegistrarMultas() {
   const { token, user } = useAuth();
@@ -31,9 +32,37 @@ function RegistrarMultas() {
     cargarDatos();
   }, [token]);
 
+  // const handleEnviarMulta = async () => {
+  //   if (!usuarioSeleccionado || !multaId || !descripcion) {
+  //     alert("Todos los campos son obligatorios");
+  //     return;
+  //   }
+
+  //   try {
+  //     await registrarMulta({
+  //       descripcion,
+  //       usuarioMultadoId: usuarioSeleccionado.id,
+  //       usuarioAutorId: user.id,
+  //       multaId: Number(multaId),
+  //       token,
+  //     });
+
+  //     alert("✅ Multa registrada correctamente");
+  //     setUsuarioSeleccionado(null);
+  //     setDescripcion("");
+  //     setMultaId("");
+  //   } catch (error) {
+  //     console.error(error);
+  //     alert("❌ Error al registrar multa", error);
+  //   }
+  // };
   const handleEnviarMulta = async () => {
     if (!usuarioSeleccionado || !multaId || !descripcion) {
-      alert("Todos los campos son obligatorios");
+      Swal.fire({
+        icon: "warning",
+        title: "Campos incompletos",
+        text: "Todos los campos son obligatorios",
+      });
       return;
     }
 
@@ -46,13 +75,23 @@ function RegistrarMultas() {
         token,
       });
 
-      alert("✅ Multa registrada correctamente");
+      await Swal.fire({
+        icon: "success",
+        title: "✅ Multa registrada correctamente",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
       setUsuarioSeleccionado(null);
       setDescripcion("");
       setMultaId("");
     } catch (error) {
       console.error(error);
-      alert("❌ Error al registrar multa", error);
+      Swal.fire({
+        icon: "error",
+        title: "❌ Error al registrar multa",
+        text: error?.message || "Ocurrió un error inesperado",
+      });
     }
   };
 
