@@ -3,7 +3,7 @@ import { Dashboard, Auth } from "./layouts";
 import RegistrarMultas from "./pages/multas/RegistrarMultas";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import PublicRoute from "./routes/PublicRoute";
-import SessionExpired from "./pages/auth/SessionExpired";
+import SessionExpired from "./pages/auth/sessionExpired";
 
 function App() {
   // console.log("🟢 App cargado");

@@ -1,3 +1,3 @@
 export * from "./sign-in";
 export * from "./sign-up";
-export * from "./SessionExpired";
+export * from "./sessionExpired";
